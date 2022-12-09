@@ -1,5 +1,6 @@
 /*
 UNIVERSIDAD NACIONAL AUTÓNOMA DE MÉXICO
+Facultad de Ingeniería
 Compiladores  -  Grupo 03
 Semestre 2023-1
 Profesora: Laura Sandoval
@@ -14,6 +15,7 @@ Descripción: Conjunto de funciones para la creación de tablas
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 
 //>>>>>>>>>>>>>>>>>>>>>>>> FUNCIONES DE CUALQUIER COMPONENTE LÉXICO
@@ -177,7 +179,7 @@ void LiberaMemoria(Componente *componente){
 */
 void ImprimeToken(Componente infotoken){
 	int clase = infotoken.clase;
-	if(clase==2|clase==3|clase==5|clase==6|clase==8){
+	if(clase==5|clase==6|clase==8){
 		printf("(%d,%s)", clase,infotoken.cadena);
 	}else{
 		printf("(%d,%d)",clase,infotoken.valor);	
@@ -196,4 +198,39 @@ void ImprimeListaTokens(Tabla lista){
         q = q->sig;
     }
     printf("\n");
+}
+
+/*
+	Recibe la lista en la que va a buscar y la
+	posición del atomo en la cadena de átomos.
+	Con esto, podemos devolver el token y 
+	obtener su información.
+*/
+Nodo* buscarToken(Tabla tabla, int numAtomo){
+    Nodo *q = tabla.H;
+    for(int i=0; i<numAtomo; i++){
+        q = q->sig;
+    }
+    return q;
+}
+
+/*
+	Convierte de octal a decimal. Recibe la cadena
+	con la forma o<numeros> y devuelve el valor
+	decimal.
+*/
+int octadec(char* octal){
+	int i = strlen(octal)-2;
+	char c;
+	int ent;
+	int decim = 0;
+	while(i>=0){
+		octal = octal+1;
+		c = *octal;
+		ent = c-'0';
+		printf("\nn: %d*pow(8,%d)",ent,i);
+		decim = decim + ent*pow(8,i);
+		i--;
+	}
+	return decim;
 }

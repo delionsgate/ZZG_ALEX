@@ -51,4 +51,7 @@ void LiberaMemoria(Componente *componente);
 void ImprimeToken(Componente infotoken);
 void ImprimeListaTokens(Tabla lista);
 
+Nodo* buscarToken(Tabla tabla, int numAtomo);
+int octadec(char* octal);
+
 #endif // TABLAS_H_INCLUDED
